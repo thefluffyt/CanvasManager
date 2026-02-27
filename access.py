@@ -2,12 +2,20 @@ import requests
 import json
 import settings
 
-url = "https://canvas.instructure.com/api/v1/courses"
+url = "https://swinburne.instructure.com/api/v1"
 headers = {"Authorization": f"Bearer {settings.GetSetting("CANVAS_TOKEN")}"}
 
-def Access(request: str, method:str = "GET"):
+def Get_Request(request: str, method:str = "GET"):
+    if request.startswith('/') == False:
+        request = '/' + request
     try:
-        print(headers)
-        return requests.request(url=(url + request), method=method, headers=headers, timeout=10)
+        result = requests.request(url=(url + request), method=method, headers=headers, timeout=10)
+        print (result.status_code)
+        jObject = result.json()
+        
+        with open("Output/output.json", 'w') as output:
+            output.write(json.dumps(jObject))
+
+        return jObject
     except requests.exceptions.RequestException as e:
         print(e)
