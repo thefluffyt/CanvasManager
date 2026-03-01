@@ -25,6 +25,9 @@ def Hello():
     }}
 
 @app.get("/api/randNums")
-def RandNums():
-    num = random.randint(0, 10)
-    return {"result": f"{num}"}
+def RandNums(num:int = 1, min:int = 0, max:int = 10):
+    nums = []
+    for _ in range(num):
+        nums.append(random.randint(min, max))
+
+    return {"result": nums}

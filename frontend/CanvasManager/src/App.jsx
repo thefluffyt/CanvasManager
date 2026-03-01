@@ -8,11 +8,11 @@ function App() {
   
   return (
     <>
-      <div className="Header">
-        <Header text="Text Component"/>
+      <div >
+        <Header/>
       </div>
       <div className="App">
-        <RandNums numbers={Get_API("/randNums", {"count":1})}/>
+        <RandNums num={3} min={0} max={4}/>
       </div>
     </>
   )

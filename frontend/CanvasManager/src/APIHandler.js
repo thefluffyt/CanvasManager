@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 
-
 export function Get_API(endpoint, params)
 {
     const [result, setResult] = useState("");
-    const origin = "localhost:8000/api"
+    const origin = "http://localhost:8000/api"
     const pString = generateParamString(params);
 
     useEffect(() => {
     fetch(origin + endpoint + pString)
     .then(res => res.json())
-    .then(data => setMessage(data.result))
+    .then(data => setResult(data.result))
   }, []);
+
+  var response = {
+    result: result,
+  }
+
+  return response
 }
 
 function generateParamString(params)
