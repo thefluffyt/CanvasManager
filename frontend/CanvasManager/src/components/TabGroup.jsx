@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import styled from "styled-components"
 
+import {GetActiveTab} from './TabSwitch'
+
 const Tab = styled.button`
   padding: 10px 30px;
   cursor: pointer;
@@ -39,13 +41,3 @@ export function TabGroup({types})
     );
 }
 
-function GetActiveTab()
-{
-    const tab = window.location.pathname.replace('/', '').split('/')[0];
-    if (tab !== "")
-    {
-        return tab;
-    }
-
-    return "Home";
-}

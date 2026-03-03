@@ -43,41 +43,6 @@ function clicked()
     Button.props.action();
 }
 
-const ButtonToggle = styled(Button)`
-    opacity: 0.7;
-    ${({ active }) =>
-        active && `opacity: 1;`}
-`;
 
-const Tab = styled.button`
-  padding: 10px 30px;
-  cursor: pointer;
-  opacity: 0.6;
-  background: white;
-  border: 0;
-  outline: 0;
-  border-bottom: 2px solid transparent;
-  transition: ease border-bottom 250ms;
-  ${({ active }) =>
-    active &&
-    `
-    border-bottom: 2px solid black;
-    opacity: 1;
-  `}
-`;
-
-function ToggleGroup()
-{
-    const [active, setActive] = useState(types[0]);
-    return (
-        <>
-            <div>
-                {types.map((type)=> (
-                    <ButtonToggle active={active === type} onClick={() => setActive(type)}>{type}</ButtonToggle>
-                ))}
-            </div>
-        </>
-    );
-}
 
 export default Button
