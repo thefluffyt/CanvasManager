@@ -1,4 +1,7 @@
 import React from 'react'
+
+import { TabGroup } from './TabGroup';
+
 import '../styles/header.css'
 
 function Header()
@@ -6,6 +9,20 @@ function Header()
     return (
         <header className="header">
             <img src="logo.png" alt="Company Logo" className="logo" />
+            <TabGroup types={["Home", "Courses", "Grades", "Communications", "Calendar", "Settings"]}/>
+        </header>
+    )
+}
+
+function showAlert(message)
+{
+    window.alert(message);
+}
+
+export default Header
+
+/**
+ * 
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
@@ -16,8 +33,4 @@ function Header()
                     <li><a href="/settings">Settings</a></li>
                 </ul>
             </nav>
-        </header>
-    )
-}
-
-export default Header
+ */
