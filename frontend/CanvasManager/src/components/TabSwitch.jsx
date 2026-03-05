@@ -1,6 +1,7 @@
 import React from 'react'
 
 import RandNums from './RandNums'
+import CourseBox from './courses/courseBox';
 
 export function TabSwitch({})
 {
@@ -13,6 +14,7 @@ export function TabSwitch({})
             tabContents = (<><RandNums num={3}min={0}max={5}/></>)
             break;
         case "Courses":
+            tabContents = (<><CourseBox/></>)
             break;
         case "Calendar":
             break;
