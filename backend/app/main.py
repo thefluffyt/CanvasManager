@@ -38,12 +38,3 @@ def RandNums(num:int = 1, min:int = 0, max:int = 10):
         nums.append(random.randint(min, max))
 
     return {"result": nums}
-
-@api.get("/api/courses")
-def GET_Courses():
-    courseList = []
-    courseJson = canvaslms.GET_COURSES()
-    for course in courseJson:
-        courseList.append(course["name"])
-    
-    return {"result": courseList}

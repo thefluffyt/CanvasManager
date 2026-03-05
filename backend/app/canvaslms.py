@@ -21,10 +21,9 @@ def IteratePages(url, headers, params=None, timeout=30):
         params = None
 
 
-
-
-def GET_COURSES(*, params=None, timeout=10):
-    url = f"{base_url}/api/v1/courses"
+def GET_Canvas(*, params=None, timeout=10, endpoint:str):
+    if endpoint.startswith('/'): endpoint.removeprefix('/')
+    url =f"{base_url}/api/v1/{endpoint}"
     allItems = []
     for page in IteratePages(url, headers, params=params, timeout=timeout):
         allItems.extend(page)
