@@ -1,6 +1,8 @@
 import React from 'react'
 import { useApi } from '../../APIHandler'
 
+import CourseButtonContainer from './CourseButtonContainer';
+
 function CourseBox ({filters})
 {   
     const { data, loading, error } = useApi("/courses");
@@ -11,11 +13,12 @@ function CourseBox ({filters})
     const jObjects = data?.result ?? []; 
     const orgs = jObjects.filter(course => course.name?.startsWith("ORG"));
 
-    var courses = jObjects.filter(course => course.name.startsWith("2"));
-    const prefixMap = new Map()
+    const courses = [...jObjects].filter(course => course.name.startsWith("2")).reverse();
+    const prefixMap = new Map();
+    var orderedCourses = [];
 
     for (const course of courses) {
-      const slice = course.name?.slice(0, 8);
+      const slice = course.name.slice(0, 8);
       if (!prefixMap.has(slice)) {
         prefixMap.set(slice, []);
       }
@@ -23,37 +26,23 @@ function CourseBox ({filters})
       prefixMap.get(slice).push(course);
     }
 
-    const orderedPrefixes = [...prefixMap.keys()].sort((a, b) => a - b).reverse(); //Orders alphabetially
-    for (const prefix of orderedPrefixes)
+    for (const prefix of prefixMap.keys())
     {
-        
+      var mapCourses = prefixMap.get(prefix);
+
+      mapCourses.map(course => console.log(course.name.substring(9, 17)));
+      mapCourses.sort((a, b) => a.name.substring(9, 17).localeCompare(b.name.substring(9, 17)));
+      mapCourses.map(course => console.log(course.name.substring(9, 17) + "!"));
+
+      mapCourses.map(course => (orderedCourses.push(course)));
     }
-    
 
     return (
       <div>
-        <p>Courses</p>
-        <ul>
-          {courses.map(course => (
-              <li key={course.id}>{course.name}</li>
-          ))}
-        </ul>
-        <p>Organisiations</p>
-        <ul>
-            {orgs.map(org => (
-                <li key={org.id}>{org.name}</li>
-            ))}
-        </ul>
+        <CourseButtonContainer courses={orderedCourses} name="Courses"/>
+        <CourseButtonContainer courses={orgs} name="Organisations"/>
       </div>
     );
-
-    /**
-     * Needs to be in date order but then name order
-     * Split into arrays for each course inital 8 chars "202x-HSx"
-     * Sort arrays reverse alphabetical
-     * Sort elements of each array alphabetically
-     * Add orgs at the bottom
-     */
 }
 
 export default CourseBox
