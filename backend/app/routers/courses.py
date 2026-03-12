@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status #type: ignore
 from typing import List, Optional
 from app.services.courses_service import (
-    list_courses, get_course
+    list_courses, get_courses
 )
 
 import app.canvaslms as canvaslms
@@ -11,6 +11,6 @@ router = APIRouter(
     tags=["courses"],
 )
 
-@router.get("")
+@router.get("/")
 async def Get_Courses():
-    return await list_courses()
+    return await get_courses()

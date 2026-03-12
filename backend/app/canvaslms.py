@@ -1,4 +1,4 @@
-import requests
+import requests #type: ignore
 import app.settings as settings
 
 base_url = "https://swinburne.instructure.com"

@@ -1,8 +1,13 @@
-import { Get_API } from "../APIHandler"
+import { useApi } from "../APIHandler"
 
 function RandNums ({num, min, max})
 {
-    var numbers = Get_API("/randNums", {num: num, min: min, max: max}).result;
+    const {data, loading, error} = useApi("/randNums", {num: num, min: min, max: max});
+
+    if (loading) return <p>Loading...</p>
+    if (error) return <p>Error: ({error.message})</p>
+
+    const numbers = data?.result ?? [];
     var stringBuilder = ""
 
     for (var i = 0; i < numbers.length; i++)

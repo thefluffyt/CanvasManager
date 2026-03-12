@@ -9,8 +9,6 @@ import app.canvaslms as canvaslms
 
 api = FastAPI(title = "Canvas Manager API", version = "0.0.1")
 
-api.include_router(courses_router.router)
-
 origins = [
     "http://localhost:5173",
     "http://localhost:8000"
@@ -21,8 +19,11 @@ api.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
+    max_age=600
 )
+
+api.include_router(courses_router.router)
 
 @api.get("/api/hello")
 def Hello():

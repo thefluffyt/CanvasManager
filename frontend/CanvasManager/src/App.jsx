@@ -1,5 +1,3 @@
-import { Get_API } from "./APIHandler";
-
 import Header from "./components/Header";
 import { TabSwitch } from "./components/TabSwitch";
 
