@@ -3,6 +3,8 @@ import { useApi } from '../../APIHandler'
 
 import CourseButtonContainer from './CourseButtonContainer';
 
+import '../../styles/courses.css'
+
 function CourseBox ({filters})
 {   
     const { data, loading, error } = useApi("/courses");
@@ -29,10 +31,7 @@ function CourseBox ({filters})
     for (const prefix of prefixMap.keys())
     {
       var mapCourses = prefixMap.get(prefix);
-
-      mapCourses.map(course => console.log(course.name.substring(9, 17)));
       mapCourses.sort((a, b) => a.name.substring(9, 17).localeCompare(b.name.substring(9, 17)));
-      mapCourses.map(course => console.log(course.name.substring(9, 17) + "!"));
 
       mapCourses.map(course => (orderedCourses.push(course)));
     }
